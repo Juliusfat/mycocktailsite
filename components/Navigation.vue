@@ -6,7 +6,7 @@
           <span class="navbar-item" style="font-weight:bold;">DRINKING TIME</span>
         </div>
         <div class="navbar-end">
-          <div class="navbar-item fav" @click="activeModal()">Fav: {{favorite}}</div>
+          <div v-show="favorite > 0" class="navbar-item fav" @click="activeModal()">Fav: {{favorite}}</div>
           <nuxt-link to="/" class="navbar-item">Home</nuxt-link>
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">More</a>
