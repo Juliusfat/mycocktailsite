@@ -1,33 +1,42 @@
 <template>
   <div v-if="drink" class="container is-fluid">
-    <div class="columns">
-      <div class="column is-three-thirds">
+    <div class="columns" ref="content">
+      <div class="image column is-three-thirds">
         <img :src="drink.strDrinkThumb" class="picture" />
       </div>
       <div class="column right">
-        <h1 class="title is-2">{{drink.strDrink}}</h1>
-        <h3 class="title is-4">Instructions</h3>
-        <p class="is-medium">{{drink.strInstructions}}</p>
-        <h3 class="title is-4">Composition</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Ingredients</th>
-              <th>Measure</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(compo, index) in tabIngMes" :key="index">
-              <td>{{compo.ingredient}}</td>
-              <td>{{compo.quantity}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <nuxt-link to="/">
-          <button class="go-home button is-dark">Go home!</button>
-        </nuxt-link>
-        <button v-if="inFavorite" class="add-store button is-danger" @click="removeFavorite(drink.idDrink)">Del Favorite</button>
-        <button v-else class="add-store button is-link" @click="addFavorite(drink.idDrink)">add Favorite</button>
+        <div>
+          <h1 class="title is-2">{{drink.strDrink}}</h1>
+          <h3 class="title is-4">Instructions</h3>
+          <p class="is-medium">{{drink.strInstructions}}</p>
+          <h3 class="title is-4">Composition</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Ingredients</th>
+                <th>Measure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(compo, index) in tabIngMes" :key="index">
+                <td>{{compo.ingredient}}</td>
+                <td>{{compo.quantity}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="go-home" data-html2canvas-ignore="true">
+          <button class="button is-success" @click="download()">PDF</button>
+          <nuxt-link to="/">
+            <button class="button is-dark">Go home!</button>
+          </nuxt-link>
+          <button
+            v-if="inFavorite"
+            class="button is-danger"
+            @click="removeFavorite(drink.idDrink)"
+          >Del Favorite</button>
+          <button v-else class="button is-primary" @click="addFavorite(drink)">add Favorite</button>
+        </div>
       </div>
     </div>
   </div>
@@ -35,7 +44,6 @@
 
 <script>
 import axios from 'axios'
-
 function createTab(obj) {
   const keepProps = []
   for (let i = 1; i < 16; i++) {
@@ -61,15 +69,33 @@ export default {
     return { drink: data.drinks[0], tabIngMes: createTab(data.drinks[0]) }
   },
   methods: {
-    addFavorite(id){
-      this.$store.commit('panier/ADD_COCKTAIL',id)
+    addFavorite(id) {
+      this.$store.commit('panier/ADD_COCKTAIL', id)
     },
-    removeFavorite(id){
-      this.$store.commit('panier/REMOVE_COCKTAIL',id)
+    removeFavorite(id) {
+      this.$store.commit('panier/REMOVE_COCKTAIL', id)
+    },
+    download() {
+      if (process.client) {
+        let jsPDF = require('jspdf')
+        let html2canvas = require('html2canvas')
+        const doc = new jsPDF('landscape', 'mm', 'a4')
+        var canvasElement = document.createElement('canvas')
+        html2canvas(this.$refs.content, {
+          canvas: canvasElement,
+          imageTimeout: 5000,
+          useCORS: true
+        }).then(canvas => {
+          const img = canvas.toDataURL('image/jpeg', 1.0)
+          doc.setFontSize(12)
+          doc.addImage(img, 'JPEG', 6, 20)
+          doc.save('sample.pdf')
+        })
+      }
     }
   },
   computed: {
-    inFavorite(){
+    inFavorite() {
       return this.$store.getters['panier/isInFav'](this.drink.idDrink)
     }
   }
@@ -78,7 +104,9 @@ export default {
 
 <style scoped>
 .container {
-  margin-top: 4em;
+  width: 70em;
+  margin: 10em auto;
+  color: grey;
 }
 
 .picture {
@@ -88,28 +116,31 @@ export default {
 table {
   width: 60%;
 }
+.is-medium {
+  width: 30em;
+}
 
 p {
   margin-bottom: 2em;
 }
 
-.right{
+.right {
   position: relative;
+  margin-left: 1em;
 }
 
 .go-home {
   position: absolute;
   right: 1em;
-  bottom: 4em;
-}
-
-.add-store{
-  position: absolute;
-  right: 1em;
   bottom: 1em;
 }
 
+.image {
+  border: solid 1em white;
+  padding: 0;
+}
+
 button {
-  width: 7em
+  width: 7em;
 }
 </style>

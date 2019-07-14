@@ -23,11 +23,15 @@ export default {
   ** Global CSS
   */
   css: [
+    { src: '~assets/css/style.css' }
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    // ssr: false to only include it on client-side
+    { src: '~/plugins/html2canvas.js', ssr: false },
+    { src: '~/plugins/jspdf.js', ssr: false }
   ],
   /*
   ** Nuxt.js modules
@@ -58,6 +62,9 @@ export default {
           customProperties: false
         }
       }
+    },
+    build: {
+      vendor: ['html2canvas', 'jspdf']
     },
     /*
     ** You can extend webpack config here

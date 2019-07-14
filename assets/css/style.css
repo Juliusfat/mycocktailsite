@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Dumbledore";
+    src : url("../font/dum1/dum1.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Argentum";
+    src: url("../font/argentum/ArgentumSans-Light.otf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+body {
+    font-family: "Argentum", sans-serif !important;
+    font-size: 13px;
+}

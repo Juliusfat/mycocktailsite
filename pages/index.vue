@@ -88,7 +88,8 @@ export default {
   align-items: stretch;
 }
 .container {
-  margin-top: 4em;
+  width: 75em;
+  margin: 4em auto;
 }
 </style>
 
