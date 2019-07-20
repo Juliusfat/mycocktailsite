@@ -132,7 +132,7 @@ p {
 .go-home {
   position: absolute;
   right: 1em;
-  bottom: 1em;
+  bottom: -2em;
 }
 
 .image {

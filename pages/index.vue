@@ -1,6 +1,9 @@
 <template>
   <div>
     <banner></banner>
+    <div class="reveal">
+    <spotlight></spotlight>
+    </div>
     <div v-show="wines && drinks" class="container is-fluid">
       <h1 class="title is-3">Few Margarita's Cocktails</h1>
       <div class="reveal container">
@@ -33,8 +36,8 @@
           </nuxt-link>
         </div>
       </div>
-      <h1 class="reveal title is-3" style="margin-top: 2em;">Few Wine's Cocktails</h1>
-      <div class="container">
+      <h1 class="title is-3" style="margin-top: 2em;">Few Wine's Cocktails</h1>
+      <div class="reveal container">
         <div class="columns is-multiline">
           <nuxt-link
             class="column is-one-fifth"
@@ -71,13 +74,15 @@
 <script>
 import axios from 'axios'
 import Banner from '@/components/Banner'
+import Spotlight from'@/components/Spotlight'
 const options = {
   root: null,
   threshold: 0.1
 }
 export default {
   components: {
-    Banner
+    Banner,
+    Spotlight
   },
   data() {
     return {
@@ -112,7 +117,6 @@ export default {
   },
   methods: {
     handleInstersect(entry) {
-      console.log(entry)
       entry.target.classList.remove('reveal')
       entry.target.classList.add('reveal-visible')
     }
@@ -129,6 +133,10 @@ export default {
   width: 90em;
   margin: 4em auto;
 }
+
+.card:hover{
+  opacity: 0.5;
+} 
 </style>
 
 

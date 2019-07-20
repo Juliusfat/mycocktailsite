@@ -16,7 +16,7 @@
             <nuxt-link :to="'/drinks/' + cocktail.idDrink">
               <div
                 class="cocktail-card"
-                :style="`background:url(${cocktail.strDrinkThumb}); background-size:cover`"
+                :style="`background:url(${cocktail.strDrinkThumb}); background-size: cover;`"
               >
                 <h3 class="cocktail-name title is-5">{{cocktail.strDrink}}</h3>
               </div>

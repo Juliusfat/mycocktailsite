@@ -36,3 +36,10 @@ export default {
   
 }
 </script>
+
+<style scoped>
+.fav {
+  cursor: pointer;
+}
+</style>
+

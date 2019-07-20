@@ -30,7 +30,7 @@ export default {
 
 <style>
 html {
-  background: linear-gradient(to right, rgb(201, 214, 255), rgb(226, 226, 226));
+  background: linear-gradient(to right, rgb(252, 204, 141), rgb(244, 232, 188));
 }
 .overlay {
   position: fixed;
