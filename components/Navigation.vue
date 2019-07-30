@@ -13,6 +13,7 @@
             <div class="navbar-dropdown">
               <nuxt-link to="/search" class="navbar-item">Search</nuxt-link>
               <nuxt-link to="/about" class="navbar-item">About</nuxt-link>
+              <nuxt-link to="/cocktail_form" class="navbar-item">Add cocktail</nuxt-link>
             </div>
           </div>
         </div>

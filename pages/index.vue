@@ -1,7 +1,7 @@
 <template>
   <div>
     <banner></banner>
-    <div class="reveal">
+    <div>
     <spotlight></spotlight>
     </div>
     <div v-show="wines && drinks" class="container is-fluid">

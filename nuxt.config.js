@@ -4,6 +4,12 @@ export default {
   /*
   ** Headers of the page
   */
+
+ server: {
+  port: 8000, // par défaut: 3000
+  // host: '0.0.0.0', par défaut: localhost
+  },
+
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -23,7 +29,8 @@ export default {
   ** Global CSS
   */
   css: [
-    { src: '~assets/css/style.css' }
+    { src: '~assets/css/style.css' },
+    '@fortawesome/fontawesome-svg-core/styles.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -31,7 +38,8 @@ export default {
   plugins: [
     // ssr: false to only include it on client-side
     { src: '~/plugins/html2canvas.js', ssr: false },
-    { src: '~/plugins/jspdf.js', ssr: false }
+    { src: '~/plugins/jspdf.js', ssr: false },
+    { src: '~/plugins/font-awesome' }
   ],
   /*
   ** Nuxt.js modules

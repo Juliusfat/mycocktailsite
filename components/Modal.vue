@@ -1,36 +1,26 @@
 <template>
   <div class="popup">
-    <img class="cross-svg" src="@/static/close.svg" alt="" @click="closeModal">
+    <img class="cross-svg" src="@/static/close.svg" alt @click="closeModal" />
     <h1 class="title is-2">list of your precious cocktails</h1>
     <div class="carte">
-      <vue-flip
-        v-for="fav in listFav"
-        :key="fav.idDrink"
-        :active-click="true"
-        width="200px"
-        height="220px"
-        transition="1s"
-        class="flip"
-      >
-        <div slot="front" class="pile">
-          <img :src="fav.strDrinkThumb" alt />
+      <div class="flip-card flip" v-for="fav in listFav" :key="fav.idDrink">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img :src="fav.strDrinkThumb" alt />
+          </div>
+          <div class="flip-card-back">
+            <span class="info title is-5">{{fav.strDrink}}</span>
+            <button class="remove is-danger" @click="removeFavorite(fav.idDrink)">Remove</button>
+          </div>
         </div>
-        <div slot="back" class="face">
-          <span class="info title is-5">{{fav.strDrink}}</span>
-          <button class="remove is-danger" @click="removeFavorite(fav.idDrink)">Remove</button>
-        </div>
-      </vue-flip>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import VueFlip from 'vue-flip'
 
 export default {
-  components: {
-    VueFlip
-  },
   methods: {
     removeFavorite(id) {
       this.$store.commit('panier/REMOVE_COCKTAIL', id)
@@ -38,7 +28,6 @@ export default {
     closeModal() {
       this.$store.commit('modal/CHANGE_VALUE')
     }
-
   },
   computed: {
     listFav() {
@@ -56,11 +45,37 @@ export default {
   right: 30%;
   z-index: 10;
   height: 42em;
-  width: 50em;
+  width: 49em;
   box-shadow: 10px 5px 5px grey;
 }
 
-.pile {
+.flip-card {
+  background-color: transparent;
+  width: 12em;
+  height: 14em;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.flip-card-front {
   height: 100%;
   color: white !important;
 }
@@ -71,7 +86,6 @@ img {
 
 .flip {
   margin: 1em;
-  cursor: pointer;
 }
 
 .carte {
@@ -81,32 +95,34 @@ img {
   margin: auto;
 }
 
-.face {
+.flip-card-back {
   font-weight: bold;
   text-align: center;
   background-color: #efa94b;
   height: 100%;
   color: beige;
+  transform: rotateY(180deg);
 }
 
 .title {
   text-align: center;
   color: beige;
   margin: 1em 0;
-  text-transform: capitalize; 
+  text-transform: capitalize;
 }
 
-.remove{
+.remove {
   width: 100%;
   height: 2em;
   font-size: 1em;
-  background-color: #EF5254;
+  background-color: #ef5254;
   border: none;
   font: bold;
   color: white;
   position: absolute;
   bottom: 0.5em;
   left: 0;
+  cursor: pointer;
 }
 
 .info {
@@ -117,7 +133,7 @@ img {
   width: 100%;
 }
 
-.cross-svg{
+.cross-svg {
   height: 1.5em;
   width: 1.5em;
   position: absolute;

@@ -89,7 +89,10 @@ export default {
           const img = canvas.toDataURL('image/jpeg', 1.0)
           doc.setFontSize(12)
           doc.addImage(img, 'JPEG', 6, 20)
-          doc.save('sample.pdf')
+          doc.setProperties({
+            title: this.drink.strDrink
+          })
+          doc.save(this.drink.strDrink + '.pdf')
         })
       }
     }
