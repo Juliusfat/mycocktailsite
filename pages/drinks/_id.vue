@@ -44,6 +44,10 @@
 
 <script>
 import axios from 'axios'
+let miniToastr
+if (process.client) {
+  miniToastr = require('mini-toastr').default
+}
 function createTab(obj) {
   const keepProps = []
   for (let i = 1; i < 16; i++) {
@@ -68,12 +72,29 @@ export default {
     )
     return { drink: data.drinks[0], tabIngMes: createTab(data.drinks[0]) }
   },
+  mounted() {
+    miniToastr.init()
+  },
+  notifications: {
+    showNotif: {
+      title: 'Success!!',
+      message: 'add to favorites',
+      type: 'success'
+    },
+    delFav: {
+      title: 'Remove!!!',
+      message: 'remove from favorites',
+      type: 'warn'
+    }
+  },
   methods: {
     addFavorite(id) {
       this.$store.commit('panier/ADD_COCKTAIL', id)
+      this.showNotif()
     },
     removeFavorite(id) {
       this.$store.commit('panier/REMOVE_COCKTAIL', id)
+      this.delFav()
     },
     download() {
       if (process.client) {
@@ -145,5 +166,12 @@ p {
 
 button {
   width: 7em;
+}
+
+.mini-toastr__notification {
+  right: inherit !important;
+  top: inherit !important;
+  left: 5em !important;
+  bottom: 2em !important;
 }
 </style>

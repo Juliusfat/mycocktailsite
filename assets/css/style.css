@@ -39,3 +39,10 @@ body {
 .reveal-4 {
     transition-delay: .3s;
 }
+
+.mini-toastr {
+    bottom: 2em!important;
+    left: 40% !important;
+    right: inherit !important;
+    top: inherit !important;
+  }

@@ -39,7 +39,8 @@ export default {
     // ssr: false to only include it on client-side
     { src: '~/plugins/html2canvas.js', ssr: false },
     { src: '~/plugins/jspdf.js', ssr: false },
-    { src: '~/plugins/font-awesome' }
+    { src: '~/plugins/font-awesome' },
+    { src: '~/plugins/vue-notifications', ssr: false}
   ],
   /*
   ** Nuxt.js modules
