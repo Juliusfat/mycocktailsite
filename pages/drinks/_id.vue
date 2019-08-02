@@ -25,18 +25,23 @@
             </tbody>
           </table>
         </div>
-        <div class="go-home" data-html2canvas-ignore="true">
-          <button class="button is-success" @click="download()">PDF</button>
-          <nuxt-link to="/">
-            <button class="button is-dark">Go home!</button>
-          </nuxt-link>
-          <button
-            v-if="inFavorite"
-            class="button is-danger"
-            @click="removeFavorite(drink.idDrink)"
-          >Del Favorite</button>
-          <button v-else class="button is-primary" @click="addFavorite(drink)">add Favorite</button>
-        </div>
+      </div>
+    </div>
+    <div class="rating-button">
+      <div>
+        <star-rating :border-width="3" :rating="3" :star-size="35"></star-rating>
+      </div>
+      <div class="go-home" data-html2canvas-ignore="true">
+        <button class="button is-success" @click="download()">PDF</button>
+        <nuxt-link to="/">
+          <button class="button is-dark">Go home!</button>
+        </nuxt-link>
+        <button
+          v-if="inFavorite"
+          class="button is-danger"
+          @click="removeFavorite(drink.idDrink)"
+        >Del Favorite</button>
+        <button v-else class="button is-primary" @click="addFavorite(drink)">add Favorite</button>
       </div>
     </div>
   </div>
@@ -63,7 +68,8 @@ export default {
     return {
       index: 15,
       drink: {},
-      tabIngMes: []
+      tabIngMes: [],
+      rating: 3
     }
   },
   async asyncData({ params }) {
@@ -76,7 +82,7 @@ export default {
     miniToastr.init()
   },
   notifications: {
-    showNotif: {
+    showFav: {
       title: 'Success!!',
       message: 'add to favorites',
       type: 'success'
@@ -90,7 +96,7 @@ export default {
   methods: {
     addFavorite(id) {
       this.$store.commit('panier/ADD_COCKTAIL', id)
-      this.showNotif()
+      this.showFav()
     },
     removeFavorite(id) {
       this.$store.commit('panier/REMOVE_COCKTAIL', id)
@@ -152,11 +158,12 @@ p {
   position: relative;
   margin-left: 1em;
 }
+.rating-button {
+  display: flex;
+}
 
 .go-home {
-  position: absolute;
-  right: 1em;
-  bottom: -2em;
+  margin-left: auto;
 }
 
 .image {
@@ -166,6 +173,7 @@ p {
 
 button {
   width: 7em;
+  height: 3em;
 }
 
 .mini-toastr__notification {

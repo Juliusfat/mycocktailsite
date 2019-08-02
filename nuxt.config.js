@@ -40,7 +40,8 @@ export default {
     { src: '~/plugins/html2canvas.js', ssr: false },
     { src: '~/plugins/jspdf.js', ssr: false },
     { src: '~/plugins/font-awesome' },
-    { src: '~/plugins/vue-notifications', ssr: false}
+    { src: '~/plugins/vue-notifications', ssr: false},
+    { src: '~/plugins/vue-star-rating', ssr: true}
   ],
   /*
   ** Nuxt.js modules

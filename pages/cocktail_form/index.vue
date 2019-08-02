@@ -190,7 +190,7 @@ export default {
         }
         this.saveCocktail(cocktail)
       } else {
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0)
       }
     },
     saveCocktail(cocktail) {

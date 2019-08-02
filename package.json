@@ -21,7 +21,8 @@
     "jspdf": "^1.5.3",
     "mini-toastr": "^0.8.1",
     "nuxt": "^2.0.0",
-    "vue-notifications": "^1.0.0"
+    "vue-notifications": "^1.0.0",
+    "vue-star-rating": "^1.6.1"
   },
   "devDependencies": {
     "eslint-config-prettier": "^4.1.0",
