@@ -18,7 +18,7 @@
     "@nuxtjs/bulma": "^1.2.1",
     "@nuxtjs/pwa": "^2.6.0",
     "html2canvas": "^1.0.0-rc.3",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.5.1",
     "mini-toastr": "^0.8.1",
     "nuxt": "^2.0.0",
     "vue-notifications": "^1.0.0",
